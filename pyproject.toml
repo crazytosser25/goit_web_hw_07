@@ -1,7 +1,6 @@
 [tool.poetry]
 name = "goit-web-hw-07"
 version = "0.1.0"
-package-mode = false
 description = "homework 7"
 authors = ["Y.Baranov"]
 license = "MIT"
@@ -9,6 +8,10 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+faker = "^26.0.0"
+sqlalchemy = "^2.0.31"
+psycopg2-binary = "^2.9.9"
+alembic = "^1.13.2"
 
 
 [build-system]
