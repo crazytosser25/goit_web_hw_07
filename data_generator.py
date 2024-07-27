@@ -17,8 +17,12 @@ DBSession = sessionmaker()
 
 def main():
     database = 'postgresql://postgres:mysecretpassword@localhost:5432'
-    engine = create_engine(database, echo=True)
+    engine = create_engine(
+        url=database,
+        echo=True
+    )
     session = DBSession(bind=engine)
+
     create_structure(engine)
     logging.info('Structure created.')
     generate_data(session)
