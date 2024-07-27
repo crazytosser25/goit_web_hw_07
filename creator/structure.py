@@ -7,12 +7,15 @@ from psycopg2 import DatabaseError
 
 
 class Base(DeclarativeBase):
-    pass
+    """Abstract class for alchemy"""
+    __abstract__ = True
+
 
 class Group(Base):
     __tablename__ = 'groups'
     group_id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
+
 
 class Student(Base):
     __tablename__ = 'students'
@@ -21,10 +24,12 @@ class Student(Base):
     group_id = Column(Integer, ForeignKey('groups.group_id'))
     group = relationship("Group")
 
+
 class Subject(Base):
     __tablename__ = 'subjects'
     subject_id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
+
 
 class Professor(Base):
     __tablename__ = 'professors'
@@ -37,6 +42,7 @@ class Professor(Base):
     )
     subject = relationship("Subject")
 
+
 class Grade(Base):
     __tablename__ = 'grades'
     grade_id = Column(Integer, primary_key=True)
@@ -48,6 +54,7 @@ class Grade(Base):
     student = relationship("Student")
     subject = relationship("Subject")
     professor = relationship("Professor")
+
 
 def create_structure(engine) -> None:
     try:
