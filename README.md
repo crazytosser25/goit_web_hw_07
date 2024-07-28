@@ -20,16 +20,17 @@ python data_generator.py
 python query_maker.py
 
 Script is providing help to run commands. Several commands are available:
-    1 - Find 5 students with the highest GPA across all subjects
-    2 - Find the student with the highest GPA in a particular subject.
-    3 - Find the average score in groups for a certain subject.
-    4 - Find the average score across the entire scoreboard.
-    5 - Find what courses a particular teacher teaches.
-    6 - Find a list of students in a specific group.
-    7 - Find the grades of students in a separate group for a specific subject.
-    8 - Find the avg score given by a certain teacher in his subjects.
-    9 - Find a list of courses that a particular student is taking.
-    10 - A list of courses taught to a specific student by a specific teacher.
+
+- 1 - Find 5 students with the highest GPA across all subjects
+- 2 - Find the student with the highest GPA in a particular subject.
+- 3 - Find the average score in groups for a certain subject.
+- 4 - Find the average score across the entire scoreboard.
+- 5 - Find what courses a particular teacher teaches.
+- 6 - Find a list of students in a specific group.
+- 7 - Find the grades of students in a separate group for a specific subject.
+- 8 - Find the avg score given by a certain teacher in his subjects.
+- 9 - Find a list of courses that a particular student is taking.
+- 10 - A list of courses taught to a specific student by a specific teacher.
 
 
 PS:
