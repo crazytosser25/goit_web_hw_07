@@ -12,12 +12,22 @@ class Base(DeclarativeBase):
 
 
 class Group(Base):
+    """Represents a group of students.
+
+    Args:
+        Base (DeclarativeBase): Base class for SQLAlchemy models.
+    """
     __tablename__ = 'groups'
     group_id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
     students = relationship("Student", back_populates="group")
 
 class Student(Base):
+    """Represents a student.
+
+    Args:
+        Base (DeclarativeBase): Base class for SQLAlchemy models.
+    """
     __tablename__ = 'students'
     student_id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
@@ -26,6 +36,11 @@ class Student(Base):
     grades = relationship("Grade", back_populates='student')
 
 class Subject(Base):
+    """Represents a subject.
+
+    Args:
+        Base (DeclarativeBase): Base class for SQLAlchemy models.
+    """
     __tablename__ = 'subjects'
     subject_id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
@@ -33,6 +48,11 @@ class Subject(Base):
     grades = relationship("Grade", back_populates='subject')
 
 class Professor(Base):
+    """Represents a professor.
+
+    Args:
+        Base (DeclarativeBase): Base class for SQLAlchemy models.
+    """
     __tablename__ = 'professors'
     professor_id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
@@ -45,6 +65,11 @@ class Professor(Base):
     grades = relationship("Grade", back_populates='professor')
 
 class Grade(Base):
+    """Represents a grade received by a student for a subject.
+
+    Args:
+        Base (DeclarativeBase): Base class for SQLAlchemy models.
+    """
     __tablename__ = 'grades'
     grade_id = Column(Integer, primary_key=True)
     student_id = Column(Integer, ForeignKey('students.student_id'))
@@ -58,6 +83,11 @@ class Grade(Base):
 
 
 def create_structure(engine) -> None:
+    """Creates the database structure.
+
+    Args:
+        engine (Engine): SQLAlchemy engine object.
+    """
     try:
         Base.metadata.create_all(engine)
 

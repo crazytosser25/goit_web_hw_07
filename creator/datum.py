@@ -9,7 +9,12 @@ from creator.structure import Group, Subject, Professor, Student, Grade
 
 
 
-def generate_data(session):
+def generate_data(session) -> None:
+    """Generates and inserts random data into the database.
+
+    Args:
+        session (Session): SQLAlchemy session object for database transactions.
+    """
     fake = Faker()
     try:
 

@@ -1,5 +1,8 @@
+"""Code to make querrys to univercity database using commands in terminal."""
+import os
 import sys
 import logging
+from dotenv import load_dotenv
 from sqlalchemy import create_engine, func
 from sqlalchemy.orm import sessionmaker
 from psycopg2 import DatabaseError
@@ -228,16 +231,57 @@ def select_10(s, student_id, professor_id):
         for i in result:
             print(f"- {i.course_name}")
 
+def help_string() -> str:
+    """Returns list if commands for script.
+
+    Returns:
+        str: Help text
+    """
+    return "\n'1' - Find 5 students with the highest GPA across all subjects." \
+        "\n'2' - Find the student with the highest GPA in a particular subject." \
+        "\n'3' - Find the average score in groups for a certain subject." \
+        "\n'4' - Find the average score across the entire scoreboard." \
+        "\n'5' - Find what courses a particular teacher teaches." \
+        "\n'6' - Find a list of students in a specific group." \
+        "\n'7' - Find the grades of students in a separate group for " \
+            "a specific subject." \
+        "\n'8' - Find the avg score given by a certain teacher in his subjects." \
+        "\n'9' - Find a list of courses that a particular student is taking." \
+        "\n'10' - A list of courses taught to a specific student by a specific teacher."
+
 
 def main(session) -> None:
-    RUN = True
-    while RUN:
-        query = input('\nSelect query option(1 to 10)\nor enter "q" to exit:  ')
+    """A command-line interface to interact with a database.
+
+    Args:
+        session (_type_): The SQLAlchemy session object used for database operations.
+
+    This program provides a simple command-line interface that allows users to perform various queries on a database using input options. It uses the `session` argument to execute these queries.
+
+    Here's an overview of how the program works:
+    1. The function starts by printing a welcome message and indicating it is ready to work.
+    2. A while loop is used to continuously prompt the user for query input until they choose to exit.
+    3. Users can select from 10 different options, each corresponding to a specific database operation. They are presented with these options in the command line.
+    4. Depending on the selected option, the program prompts the user for additional information (e.g., IDs) and calls the appropriate function to execute the query.
+    5. If an invalid input is entered, a warning message is displayed, and the help string is printed again.
+    6. The loop ends when the user enters 'q' or 'Q', indicating they want to exit the program. A goodbye message is then printed before the program exits.
+    """
+    run = True
+    print("Hello! Ready to work.")
+    print(help_string())
+    while run:
+        query = input(
+            "\nSelect query option(1 to 10)." \
+            "\nEnter 'h' for query list"
+            "\nor enter 'q' to exit." \
+            "\n --> :").strip().lower()
         match query:
             case "q":
                 print("Bye!")
-                RUN = False
+                run = False
                 sys.exit(1)
+            case "h" | "help":
+                print(help_string())
             case "1":
                 select_1(session)
             case "2":
@@ -270,11 +314,13 @@ def main(session) -> None:
                 select_10(session, student_id, professor_id)
             case _:
                 print("Wrong input.")
+                print(help_string())
 
 
 if __name__ == '__main__':
-    DATABASE = 'postgresql://postgres:mysecretpassword@localhost:5432'
-    engine = create_engine(url=DATABASE, echo=False)
+    load_dotenv()
+    database = os.getenv("DATABASE")
+    engine = create_engine(url=database, echo=False)
     Session = sessionmaker(bind=engine)
     q_session = Session()
     try:

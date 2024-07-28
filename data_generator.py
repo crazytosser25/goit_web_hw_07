@@ -1,5 +1,7 @@
 """Module to generate database tables and fill them vith random data"""
+import os
 import logging
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -16,10 +18,13 @@ logging.basicConfig(
 DBSession = sessionmaker()
 
 def main():
-    database = 'postgresql://postgres:mysecretpassword@localhost:5432'
+    """Main function to set up the database structure and generate data.
+    """
+    load_dotenv()
+    database = os.getenv("DATABASE")
     engine = create_engine(
         url=database,
-        echo=True
+        echo=False
     )
     session = DBSession(bind=engine)
 
