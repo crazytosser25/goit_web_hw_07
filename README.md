@@ -19,6 +19,7 @@ python data_generator.py
 
 python query_maker.py
 
+
 Script is providing help to run commands. Several commands are available:
 
 - 1 - Find 5 students with the highest GPA across all subjects
